@@ -6,11 +6,12 @@ from mediapipe.tasks.python import vision
 
 import cv2
 from visualization import visualize
-from google.colab.patches import cv2_imshow
 
+# TO-DO
+# Have multiple files and iterate through them
 IMAGE_FILE = '..\assets\image.jpg'
 img = cv2.imread(IMAGE_FILE)
-cv2_imshow(img)
+cv2.imshow(img)
 
 # STEP 2: Create an FaceDetector object.
 base_options = python.BaseOptions(model_asset_path='detector.tflite')
@@ -27,4 +28,4 @@ detection_result = detector.detect(image)
 image_copy = np.copy(image.numpy_view())
 annotated_image = visualize(image_copy, detection_result)
 rgb_annotated_image = cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB)
-cv2_imshow(rgb_annotated_image)
+cv2.imshow(rgb_annotated_image)

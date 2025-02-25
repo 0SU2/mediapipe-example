@@ -1,0 +1,1 @@
+# Script para la instalación de MediaPipe con un entorno virtual de python
