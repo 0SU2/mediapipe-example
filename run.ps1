@@ -24,9 +24,6 @@ try {
     Write-Output "Finish Testing"
 }
 
-Write-Output "Downloading necesary files"
-Invoke-WebRequest -o 'detector.tflite' 'https://storage.googleapis.com/mediapipe-models/face_detector/blaze_face_short_range/float16/1/blaze_face_short_range.tflite'
-
 Write-Output "Creating virtual enviroment for python"
 try {
     .\python-3.11\python.exe -m pip install virtualenv
@@ -54,4 +51,4 @@ Write-Output "Installing mediapipe and opencv in your virtual enviroment."
 pip install mediapipe opencv-python
 
 Write-Output "Testing"
-python run ./code/main.py
+python ./code/main.py

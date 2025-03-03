@@ -11,9 +11,6 @@ if [ $? -eq 1 ]; then
     exit 1
 fi
 
-# Installing the model
-curl --create-dirs --output ./model/detector.tflite https://storage.googleapis.com/mediapipe-models/face_detector/blaze_face_short_range/float16/1/blaze_face_short_range.tflite
-
 # TO-DO
 # We could check if the user already have this custom build install
 echo "--Preparing python python 3.11"

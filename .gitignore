@@ -2,3 +2,4 @@
 *.zip
 python-*
 model
+__pycache__
