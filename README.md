@@ -17,7 +17,7 @@ Para que se pueda realizar la demostración del programa con mediapipe deberas e
 ### Windows
 Si te encuentras en el sistemas operativo Windows 11, debes ejecutar el archivo `run.ps1` en la terminal de PowerShell. Es necesario seguir el siguiente tutorial:
 
-!Gift de la instalación de Python en Windows
+![Instalacion de python](github-assets/Installation_Python.gif)
 
 El proposito de seguir el anterior tutorial es porque el script necesita de una instalación personalizada de Python, para no afectar la versión de Python que se encuentra actualmente instalada en tu sistema operativo.
 
