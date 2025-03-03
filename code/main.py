@@ -48,7 +48,9 @@ for IMAGE_FILE in IMAGE_ARRAY:
         connection_drawing_spec=mp_drawing_styles.get_default_face_mesh_contours_style()
       )
 
-  cv2.imshow("Result", CURRENT_IMAGE)
-  cv2.waitKey(0)
+  while True:
+    cv2.imshow("Result", CURRENT_IMAGE)
+    if cv2.waitKey(1) & 0xFF == 27:
+        break
 
 cv2.destroyAllWindows()
