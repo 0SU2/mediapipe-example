@@ -4,12 +4,15 @@ echo "Starting script..."
 echo "--This script will install for you python 3.11 <= in this directory. This to prevent the using of the python version you already have in your system."
 sleep 3
 
-# Instaling python in the current directory with an specific name"
+# Installing python in the current directory with an specific name"
 curl -o "python-3.11.2.tgz" https://www.python.org/ftp/python/3.11.2/Python-3.11.2.tgz
 if [ $? -eq 1 ]; then
     echo "Error, aborting!"
     exit 1
 fi
+
+# Installing the model
+curl --create-dirs --output ./model/detector.tflite https://storage.googleapis.com/mediapipe-models/face_detector/blaze_face_short_range/float16/1/blaze_face_short_range.tflite
 
 # TO-DO
 # We could check if the user already have this custom build install
@@ -20,6 +23,7 @@ if [ $? -eq 1 ]; then
     echo "Error, aborting!"
     exit 1
 fi
+rm python-3.11.2.tgz
 
 mkdir python-3.11.2/Python-3.11.2/custom-build
 cd python-3.11.2/Python-3.11.2/custom-build
@@ -77,5 +81,6 @@ source python-3.11-virtual-enviroment/bin/activate
 pip install opencv-python mediapipe
 
 # Run the program and we are done
-python ../../../code/main.py
+cd ../../../
+python ./code/main.py
 echo "--Running program..."
