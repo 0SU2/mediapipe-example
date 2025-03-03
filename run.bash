@@ -15,7 +15,7 @@ fi
 # We could check if the user already have this custom build install
 echo "--Preparing python python 3.11"
 mkdir python-3.11.2
-tar zxvf python-3.11.2.tgz -C python-3.11.2 &>/dev/null
+tar zxvf python-3.11.2.tgz -C python-3.11.2
 if [ $? -eq 1 ]; then
     echo "Error, aborting!"
     exit 1
@@ -27,14 +27,14 @@ sleep 3
 
 ../configure --with-pydebug
 # Check if make exist
-make -v &>/dev/null
+make -v
 if [ $? -eq 1 ]; then
     echo "Please install make to continue"
     exit 1
 fi
 
 echo "---Building python, this could take sometime..."
-make &>/dev/null
+make
 if [ $? -eq 1 ]; then
     # TO-DO
     # Have a log file to repond if something happen
@@ -46,8 +46,36 @@ sleep 3
 # Now python its installed, do the pip install also
 echo "---Installing pip in the virtual enviroment..."
 curl -O https://bootstrap.pypa.io/get-pip.py &>/dev/null
-./custom-build/python get-pip.py
+./python get-pip.py
 
 # Check if pip was install succefully
 if [ $? -eq 1 ]; then
-    
+    echo "Fatal error"
+    exit 1
+fi
+
+# Now create the virtual enviroment to finish everything and make the test with the image
+./python -m pip install virtualenv
+if [ $? -eq 1 ]; then
+    echo "Error, virtualenv could not be installed in your folder."
+    exit 1
+fi
+
+./python -m virtualenv python-3.11-virtual-enviroment
+if [ $? -eq 1 ]; then
+    echo "Error while creating your virtual enviroment."
+    exit 1
+fi
+
+# Now, initialize the virtual enviroment
+echo "--Right now the script will initialized the virtual enviroment, your console will change, but you can exit with the command deactivate. So, do not worried :)"
+sleep 4
+
+source python-3.11-virtual-enviroment/bin/activate
+
+# Download opencv and mediapipe
+pip install opencv-python mediapipe
+
+# Run the program and we are done
+python ../../../code/main.py
+echo "--Running program..."
